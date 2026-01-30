@@ -3,8 +3,7 @@ sequenceDiagram
     participant browser
     participant server
 
-    Note right of browser: Browser redraws list of notes by pushing new note to the list
-
+    Note right of browser: Browser redraws list of notes after pushing new note to the list
     browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
     activate server
     Note left of server: Server adds note to https://studies.cs.helsinki.fi/exampleapp/data.json
