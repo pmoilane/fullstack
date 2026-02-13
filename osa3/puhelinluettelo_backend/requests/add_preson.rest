@@ -1,7 +1,7 @@
-POST    http://localhost:3001/api/persons/
+POST    https://render-test-ia4l.onrender.com/api/persons
 content-type: application/json
 
 {
-  "name": "Test User",
-  "number": "045-3213214"
+  "name": "Test User2",
+  "number": "045-12312321"
 }
