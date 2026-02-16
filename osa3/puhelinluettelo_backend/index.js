@@ -91,11 +91,21 @@ app.post("/api/persons/", (request, response, next) => {
 })
 
 app.put("/api/persons/:id", (request, response, next) => {
-    Person.findByIdAndUpdate(request.params.id, request.body, { returnDocument: "after"})
-        .then(result => {
-            response.json(result)
+    const { name, number } = request.body
+
+    Person.findById(request.params.id)
+        .then(person => {
+            if (!person) {
+                return response.status(404).end
+            }
+            person.name = name
+            person.number = number
+            
+            return person.save().then((updatedPerson) => {
+                response.json(updatedPerson)
+            })
+            .catch(error => next(error))
         })
-        .catch(error => next(error))
 })
 
 const errorHandler = (error, request, response, next) => {
