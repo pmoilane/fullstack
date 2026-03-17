@@ -1,0 +1,17 @@
+{
+  "name": "playwright_tests",
+  "version": "1.0.0",
+  "description": "bloglist E2E testing with Playwright",
+  "license": "ISC",
+  "author": "pmoilane",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test",
+    "test:report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.58.2",
+    "@types/node": "^25.3.3"
+  }
+}
