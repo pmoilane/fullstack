@@ -49,12 +49,12 @@ const styles = StyleSheet.create({
   },
 });
 
-const ButtonContainer = ({ id, reviewId, refetch }) => {
+const ButtonContainer = ({ repositoryId, reviewId, refetch }) => {
   const navigate = useNavigate();
   const [mutate] = useMutation(DELETE_REVIEW);
 
-  const onPress = (id) => {
-    navigate(`/${id}`);
+  const onPress = () => {
+    navigate(`/${repositoryId}`);
   };
 
   const deleteAlert = () =>
@@ -71,7 +71,7 @@ const ButtonContainer = ({ id, reviewId, refetch }) => {
           text: 'DELETE',
           onPress: async () => {
             const { data } = await mutate({
-              variables: { deleteReviewId: id },
+              variables: { deleteReviewId: reviewId },
             });
             console.log(data);
             refetch();
@@ -82,7 +82,7 @@ const ButtonContainer = ({ id, reviewId, refetch }) => {
 
   return (
     <View style={styles.container}>
-      <Pressable onPress={() => onPress(id)}>
+      <Pressable onPress={() => onPress()}>
         <Text style={styles.button}>View repository</Text>
       </Pressable>
       <Pressable onPress={deleteAlert}>
@@ -111,7 +111,11 @@ const MyReviews = () => {
       renderItem={({ item }) => (
         <View>
           <ReviewItem review={item} repositoryName={true} />
-          <ButtonContainer id={item.id} refetch={refetch} />
+          <ButtonContainer
+            reviewId={item.id}
+            refetch={refetch}
+            repositoryId={item.repositoryId}
+          />
         </View>
       )}
       keyExtractor={({ id }) => id}
